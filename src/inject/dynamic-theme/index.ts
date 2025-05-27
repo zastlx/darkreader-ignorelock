@@ -527,16 +527,6 @@ function stopWatchingForUpdates() {
 let metaObserver: MutationObserver;
 let headObserver: MutationObserver | null = null;
 
-function addMetaListener() {
-    metaObserver = new MutationObserver(() => {
-        if (document.querySelector('meta[name="darkreader-lock"]')) {
-            metaObserver.disconnect();
-            removeDynamicTheme();
-        }
-    });
-    metaObserver.observe(document.head, {childList: true, subtree: true});
-}
-
 function createDarkReaderInstanceMarker() {
     const metaElement: HTMLMetaElement = document.createElement('meta');
     metaElement.name = 'darkreader';
@@ -545,7 +535,7 @@ function createDarkReaderInstanceMarker() {
 }
 
 function isDRLocked() {
-    return document.querySelector('meta[name="darkreader-lock"]') != null;
+    return false;
 }
 
 function isAnotherDarkReaderInstanceActive() {
@@ -557,7 +547,6 @@ function isAnotherDarkReaderInstanceActive() {
         return false;
     }
     createDarkReaderInstanceMarker();
-    addMetaListener();
     return false;
 }
 
