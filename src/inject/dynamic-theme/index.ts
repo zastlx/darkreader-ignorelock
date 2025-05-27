@@ -524,7 +524,6 @@ function stopWatchingForUpdates() {
     cleanReadyStateCompleteListeners();
 }
 
-let metaObserver: MutationObserver;
 let headObserver: MutationObserver | null = null;
 
 function createDarkReaderInstanceMarker() {
@@ -786,8 +785,6 @@ export function removeDynamicTheme(): void {
     adoptedStyleManagers.splice(0);
     adoptedStyleFallbacks.forEach((fallback) => fallback.destroy());
     adoptedStyleFallbacks.clear();
-
-    metaObserver && metaObserver.disconnect();
 
     cleaners.forEach((clean) => clean());
     cleaners.splice(0);
